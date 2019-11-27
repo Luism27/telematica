@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <center>
+        <form   enctype="multipart/form-data"><br><br>
+            <input id="nombre" required type="text" name="nombre" placeholder="Escriba el nombre" value=""/><br><br>
+            <input id="cedula" required type="number" name="cedula" placeholder="Escriba la cedula" value=""/><br><br>
+            <input id="partido" required type="text" name="Partido" placeholder="Escriba el partido" value=""/><br><br>
+            <input id="cargo" required type="text" name="Cargo" placeholder="Escriba el cargo" value=""/><br><br>
+            <input id="hoja" required type="file" name="Hoja de vida" /><br><br>
+            <input id="plan" required type="file" name="Plan de gobierno" /><br><br>
+            <input id="ciudad" required type="text" name="ciudad" placeholder="Ingrese ciudad" value=""/><br><br>
+            <input id="foto" required type="file" name="foto" placeholder="foto"/><br><br>
+            <div href="#" class= "myButton" id="boton">
+            CONSULTAR
+            </div>
+        </form>
+    </center>
+    <script  >
+        const nombre = document.getElementById("nombre");
+        const cedula = document.getElementById("cedula");
+        const partido = document.getElementById("partido");
+        const cargo = document.getElementById("cargo");
+        const hoja = document.getElementById("hoja");
+        const plan = document.getElementById("plan");
+        const ciudad = document.getElementById("ciudad");
+        const foto = document.getElementById("foto");
+        const btn = document.getElementById("boton");
+        
+        btn.addEventListener("click", () => {
+        console.log(`el valor de la foto es ${foto.value }`);
+        console.log(`el valor de la hoja es ${hoja.value }`)
+        console.log(`el valor del plan ${plan.value }`)
+        let data ={
+            nombre:nombre.value ,cedula:cedula.value, partido:partido.value, cargo: cargo.value, ciudad:ciudad.value
+        };
+        console.log(data)
+        //mandar al servidor
+        fetch("/guardar",{
+            method: 'POST', // 
+            body: JSON.stringify(data), // 
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+});
+    </script>
+    {{!-- css --}}
+    <style>
+    
+
+    .myButton {
+	    background-color:#000000;
+	    border-radius:30px;
+	    border:2px solid #2bc7cc;
+	    display:inline-block;
+	    cursor:pointer;
+	    color:#ffffff;
+	    font-family:Trebuchet MS;
+	    font-size:18px;
+	    padding:15px 15px;
+	    text-decoration:none;
+        text-shadow:-2px -1px 5px #1cc1c7;
+        height: 20%;
+        width: 70%;
+        text-align:center;
+    }
+    .myButton:hover {
+	    background-color:#262b22;
+    }
+    .myButton:active {
+	    position:relative;
+    	top:1px;
+    }
+    .label {
+        color: rgb(0, 0, 0);
+        padding: 5px;
+        text-align:center;
+        font-weight:bold;
+    }
+    label {
+        padding: 5px;
+        text-align:left;
+    }
+    </style>
+</body>
+</html>
